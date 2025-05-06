@@ -4,7 +4,7 @@
     right: 20px;
     z-index: 500;
     display: block;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .status-container {
@@ -22,7 +22,6 @@
     padding: 12px;
     display: flex;
     gap: 12px;
-    justify-content: space-between;
     align-items: center;
     cursor: pointer;
     font-weight: 500;

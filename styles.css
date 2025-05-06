@@ -10,6 +10,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: ghostwhite;
+    color: midnightblue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

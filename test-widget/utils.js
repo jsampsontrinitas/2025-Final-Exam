@@ -1,5 +1,6 @@
+import Icons from "./Icons.js";
+
 /**
- * 
  * @param {string} tagname 
  * @param {string|Record<string, any>} attributes 
  * @returns 
@@ -72,40 +73,15 @@ export function createElement(tagname, attributes = {}) {
  */
 export function getTestStatusIcon(status) {
 
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.classList.add('test-icon');
-
-    svg.setAttribute('width', '16');
-    svg.setAttribute('height', '16');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke-width', '2');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-
     if (status === 'passed') {
-        svg.classList.add('check-icon');
-        svg.setAttribute('stroke', 'green');
-        svg.innerHTML = `
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>`;
+        return Icons.passed;
     } else if (status === 'failed') {
-        svg.classList.add('x-icon');
-        svg.setAttribute('stroke', 'red');
-        svg.innerHTML = `
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="15" y1="9" x2="9" y2="15"></line>
-            <line x1="9" y1="9" x2="15" y2="15"></line>`;
-    } else if (status === 'pending') {
-        svg.classList.add('pending-icon');
-        svg.setAttribute('stroke', 'orange');
-        svg.innerHTML = `
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="6" x2="12" y2="12"></line>
-            <circle cx="12" cy="16" r="1"></circle>`;
+        return Icons.failed;
+    } else if (status === 'pending' || status === 'partial') {
+        return Icons.pending;
     }
 
-    return svg;
+    throw new Error("Unsupported status:", status);
 }
 
 export function miniMarkdown(src) {
