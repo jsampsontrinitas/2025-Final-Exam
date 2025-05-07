@@ -1,11 +1,11 @@
 :root { --c1: #ff0055; --c2: #00fff7; --c3: #ff00c8; --c4: #fff200; --c6: #00ff00 }
 
-:root:not(:has(head > script[src='test-widget/widget.js'])) {
+:root:not(:has(head > script[src='widget/tracker.js'])) {
     background: black;
     overflow: hidden;
 }
 
-:root:not(:has(head > script[src='test-widget/widget.js'])) body::before {
+:root:not(:has(head > script[src='widget/tracker.js'])) body::before {
     font-size: 5em;
     content: "😱 don't break the widget! 😱";
     display: block;
@@ -21,7 +21,7 @@
     filter: blur(0.5px);
 }
 
-:root:not(:has(head > script[src='test-widget/widget.js'])) body * {
+:root:not(:has(head > script[src='widget/tracker.js'])) body * {
     display: none;
 }
 

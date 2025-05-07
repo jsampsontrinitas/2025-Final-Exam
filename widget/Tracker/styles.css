@@ -12,6 +12,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: width 0.3s ease;
+    user-select: none;
 }
 
 .status-container.expanded {
@@ -23,6 +24,7 @@
     display: flex;
     gap: 12px;
     align-items: center;
+    justify-content: flex-end;
     cursor: pointer;
     font-weight: 500;
 }
@@ -77,4 +79,42 @@
     font-weight: 500;
     color: #4b5563;
     margin-bottom: 8px;
+}
+
+.time-remaining {
+    background: rgba(0, 0, 0, 0.8);
+    color: #CCC;
+    padding: 0.5em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.status-container {
+
+    .time-remaining {
+
+        cursor: default;
+
+        .h, .m, .s {
+            &::after {
+                opacity: 0.5;
+                font-size: 0.75em;
+                margin-left: 3px;
+            }
+        }
+
+        .h::after { content: "H"; }
+        .m::after { content: "M"; }
+        .s::after { content: "S"; }
+    }
+
+    &.expanded {
+        .time-remaining {
+            .h::after { content: "HOURS"; }
+            .m::after { content: "MINUTES"; }
+            .s::after { content: "SECONDS"; }
+        }
+    }
+
 }

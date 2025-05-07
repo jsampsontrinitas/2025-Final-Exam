@@ -1,7 +1,7 @@
 import Icons from "../Icons.js";
-import TestItem from "../TestItem/element.js";
-import ModalOverlay from "../ModalOverlay/element.js";
-import { testGroups } from "../data/tests.js";
+import TestItem from "../Item/element.js";
+import ModalOverlay from "../Modal/element.js";
+import { testGroups } from "../tests/all.js";
 import { createElement, miniMarkdown, getTestStatusIcon } from "../utils.js";
 
 import sheet from './styles.css' with { type: 'css' };
@@ -99,15 +99,15 @@ export default class TestStatusIndicator extends HTMLElement {
         header.className = `status-header ${this.getStatusClass()}`;
 
         const { total, partial, pending, passed, passRate } = this.getStatusCounts();
-        const icon = header.querySelector(".test-icon");
+        // const icon = header.querySelector(".test-icon");
 
         // Add spinning icon if any tests are pending
-        if (pending > 0 && !icon) {
-            const icon = getTestStatusIcon('pending');
-            header.insertBefore(icon, header.firstElementChild);
-        } else {
-            icon?.remove();
-        }
+        // if (pending > 0 && !icon) {
+        //     const icon = getTestStatusIcon('pending');
+        //     header.insertBefore(icon, header.firstElementChild);
+        // } else {
+        //     icon?.remove();
+        // }
 
         const label = header.querySelector(".counts");
         const percent = Math.round(passRate * 100);
@@ -119,7 +119,7 @@ export default class TestStatusIndicator extends HTMLElement {
         return createElement('div.status-header', {
             innerHTML: `
                 <span class="counts">00 of 00 (00%)</span>
-                ${ Icons.chevron.outerHTML }
+                ${Icons.chevron.outerHTML}
             `
         });
     }
@@ -146,10 +146,59 @@ export default class TestStatusIndicator extends HTMLElement {
         return statusBody;
     }
 
+    buildTimeRemainingElement() {
+        // Starts at 8:05 AM on Friday, May 9th, 2025 (Central Time)
+        // Ends   at 9:50 AM on Friday, May 9th, 2025 (Central Time)
+
+        // Set the end time once when the element is created
+        // const endTimeUTC = Date.now() + 60 * 60 * 1000; // one hour from now
+        // New end time will be 5/9/2025 9:50 AM Central Time
+        const endTimeUTC = new Date(2025, 4, 9, 14, 50); // UTC time
+
+        function buildTimeRemainingString() {
+            const nowUTC = Date.now();
+            const timeRemaining = Math.max(0, endTimeUTC - nowUTC);
+            const totalSeconds = Math.floor(timeRemaining / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            return timeRemaining > 0
+                ? `
+                <span class="h">${String(hours).padStart(2, '0')}</span> 
+                <span class="m">${String(minutes).padStart(2, '0')}</span> 
+                <span class="s">${String(seconds).padStart(2, '0')}</span>
+            `
+                : "TIMES UP";
+        }
+
+        let formattedTime = buildTimeRemainingString();
+
+        const timeRemainingElement = createElement('div.time-remaining');
+
+        function refreshLabel() {
+            const newTime = buildTimeRemainingString();
+            if (newTime !== formattedTime) {
+                timeRemainingElement.innerHTML = newTime;
+                formattedTime = newTime;
+            }
+            if (newTime === "TIMES UP") {
+                timeRemainingElement.classList.add('expired');
+                clearInterval(interval);
+            }
+        }
+
+        const interval = setInterval(refreshLabel, 1000);
+
+        refreshLabel();
+
+        return timeRemainingElement;
+    }
+
     buildStatusContainerElement() {
         const container = createElement('div.status-container');
         container.appendChild(this.buildStatusContainerHeader());
         container.appendChild(this.buildStatusContainerBody());
+        container.appendChild(this.buildTimeRemainingElement());
         return container;
     }
 

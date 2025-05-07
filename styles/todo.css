@@ -1,0 +1,45 @@
+#todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #CCC;
+    padding: 0 2em;
+}
+
+#listControls {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+    gap: 0.5em;
+    width: 100%;
+}
+
+#listControls input {
+    width: 100%;
+    padding: 1em;
+}
+
+#listControls button {
+    flex: 1;
+    padding: 0.5em;
+}
+
+ul#list {
+    list-style: none;
+    padding: 0;
+}
+
+ul#list li {
+    padding: 0.5em;
+}
+
+ul#list li+li {
+    border-top: 1px solid #CCC;
+}
+
+ul#list:empty::before {
+    content: "no items in the list";
+    font-style: italic;
+    color: gray;
+}

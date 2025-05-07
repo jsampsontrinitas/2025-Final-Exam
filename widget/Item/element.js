@@ -29,7 +29,7 @@ export default class TestItem extends HTMLElement {
     connectedCallback() {
         this.shadowRoot.innerHTML = `
             <div class="test-item">
-                ${ Icons.pending.outerHTML }
+                ${Icons.pending.outerHTML}
                 <span class="test-name" data-test-id="${this._id}">
                     ${miniMarkdown(this._name)}
                 </span>
@@ -43,12 +43,21 @@ export default class TestItem extends HTMLElement {
 
     async run() {
         try {
+            /**
+             * @type {boolean|{remaining: number, total: number}}
+             * @description The function to run the test. It should return a boolean or an object with the remaining and total issues.
+             */
             const results = await this._fn();
+
             if (typeof results === "boolean") {
                 this.status = results ? 'passed' : 'failed';
             } else if (results && typeof results === "object" && !Array.isArray(results)) {
-                this.status = 'partial';
-                this.partialResults = results;
+                if (results.remaining === 0) {
+                    this.status = 'passed';
+                } else {
+                    this.status = 'partial';
+                    this.partialResults = results;
+                }
             }
         } catch (e) {
             this.status = 'failed';
@@ -72,7 +81,10 @@ export default class TestItem extends HTMLElement {
         this.shadowRoot.querySelector(".test-name").innerHTML = miniMarkdown(newName);
     }
 
-    
+    /**
+     * @param {{remaining: number, total: number}} results
+     * @description The partial results of the test. It should be an object with the remaining and total issues.
+     */
     set partialResults(results) {
         if (this._partialResults === results) {
             return;
@@ -80,7 +92,7 @@ export default class TestItem extends HTMLElement {
 
         this._partialResults = results;
         const element = this.shadowRoot.querySelector(".partial-results");
-        element.textContent = `${ results.remaining } of ${ results.total } issues remaining`;
+        element.textContent = `${results.remaining} of ${results.total} issues remaining`;
     }
 
     /**

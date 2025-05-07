@@ -1,4 +1,4 @@
-import "./TestStatusIndicator/element.js";
+import "./Tracker/element.js";
 
 // Create an instance of our custom element
 const widget = document.createElement('test-status-indicator');

@@ -1,0 +1,43 @@
+:root {
+    --text-color: midnightblue;
+    --background-color: ghostwhite;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#intro {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+
+footer {
+    width: 100%;
+    margin-top: 2em;
+    padding-top: 2em;
+    border-top: 1px dotted #CCC;
+    text-align: center;
+}
