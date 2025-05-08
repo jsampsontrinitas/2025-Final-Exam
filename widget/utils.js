@@ -103,3 +103,26 @@ export function miniMarkdown(src) {
         .replace(/\*([^\*]+)\*/g, "<strong>$1</strong>")  // bold
         .replace(/_([^_]+)_/g, "<em>$1</em>");           // italic
 }
+
+export function clearState(name) {
+    localStorage.removeItem(name);
+}
+
+export function saveState(name, value) {
+    if (typeof value === "object") {
+        value = JSON.stringify(value);
+    }
+    localStorage.setItem(name, value);
+}
+
+export function loadState(name, defaultValue) {
+    const value = localStorage.getItem(name);
+    if (value === null) {
+        return defaultValue;
+    }
+    try {
+        return JSON.parse(value);
+    } catch (e) {
+        return value;
+    }
+}

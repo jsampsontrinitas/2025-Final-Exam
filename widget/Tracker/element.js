@@ -2,7 +2,7 @@ import Icons from "../Icons.js";
 import TestItem from "../Item/element.js";
 import ModalOverlay from "../Modal/element.js";
 import { testGroups } from "../tests/all.js";
-import { createElement, miniMarkdown, getTestStatusIcon } from "../utils.js";
+import { createElement, miniMarkdown, getTestStatusIcon, saveState, loadState } from "../utils.js";
 
 import sheet from './styles.css' with { type: 'css' };
 
@@ -22,6 +22,25 @@ export default class TestStatusIndicator extends HTMLElement {
     connectedCallback() {
         this.render();
         this.addEventListeners();
+
+        // Restore state?
+        const expanded = loadState('test-status.expanded');
+        if (expanded !== null) {
+            // Expand the view
+            this.expanded = expanded;
+            this.statusContainer.classList.toggle('expanded', this.expanded);
+
+            // Update scrollTop
+            const statusBody = this.shadowRoot.querySelector(".status-body");
+            statusBody.scrollTop = loadState('test-status.scrollTop', 0);
+
+            // Was the modal visible?
+            const visible = loadState('modal.visible', false);
+            if (visible) {
+                // Just need to add the modal; it will restore itself
+                document.body.appendChild(this.modal);
+            }
+        }
     }
 
     initializeTestItemElements() {
@@ -68,6 +87,7 @@ export default class TestStatusIndicator extends HTMLElement {
     toggleExpand() {
         this.expanded = !this.expanded;
         this.statusContainer.classList.toggle('expanded', this.expanded);
+        saveState('test-status.expanded', this.expanded);
     }
 
     showTestDetailsInModal(testItem) {
@@ -91,6 +111,12 @@ export default class TestStatusIndicator extends HTMLElement {
             const item = event.target.closest('test-item');
             if (item) this.showTestDetailsInModal(item);
             if (event.target.closest('.status-header')) this.toggleExpand();
+        });
+
+        const statusBody = this.shadowRoot.querySelector(".status-body");
+        statusBody.addEventListener('scroll', (event) => {
+            const scrollTop = event.target.scrollTop;
+            saveState('test-status.scrollTop', scrollTop);
         });
     }
 

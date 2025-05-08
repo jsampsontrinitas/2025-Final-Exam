@@ -1,5 +1,5 @@
 import Icons from "../Icons.js";
-import { createElement, miniMarkdown } from "../utils.js";
+import { clearState, saveState, loadState, createElement, miniMarkdown } from "../utils.js";
 
 import sheet from './styles.css' with { type: 'css' };
 
@@ -22,6 +22,40 @@ export default class ModalOverlay extends HTMLElement {
     connectedCallback() {
         this.buildModalOverlayElement();
         this.setupEventListeners();
+        this._restoreState();
+    }
+
+    _restoreState() {
+        const visible = loadState('modal.visible');
+
+        if (!visible) {
+            return;
+        }
+
+        const title = loadState('modal.title');
+        const content = loadState('modal.content');
+        const icon = loadState('modal.icon');
+
+        this.setAll({ title, content, icon });
+        this.show();
+    }
+
+    _saveState() {
+        const title = this.title.innerHTML;
+        const content = this.content.innerHTML;
+        const icon = this.icon.firstElementChild.outerHTML;
+
+        saveState('modal.visible', true);
+        saveState('modal.title', title);
+        saveState('modal.content', content);
+        saveState('modal.icon', icon);
+    }
+
+    _clearState() {
+        clearState('modal.visible');
+        clearState('modal.title');
+        clearState('modal.content');
+        clearState('modal.icon');
     }
 
     buildModalOverlayElement() {
@@ -66,15 +100,26 @@ export default class ModalOverlay extends HTMLElement {
     setAll({ icon, title, content }) {
         if (title) this.title.innerHTML = miniMarkdown(title);
         if (content) this.content.innerHTML = miniMarkdown(content);
-        if (icon) {
+        if (icon && icon instanceof SVGSVGElement) {
             this.icon.firstElementChild
                 ? this.icon.firstElementChild.replaceWith(icon)
                 : this.icon.appendChild(icon);
+        } else if (icon && typeof icon === 'string') {
+            this.icon.innerHTML = icon;
         }
     }
 
-    show() { [this.modal, this.overlay].map(o => o.classList.add('visible')); }
-    hide() { [this.modal, this.overlay].map(o => o.classList.remove('visible')); }
+    show() {
+        [this.modal, this.overlay].map(o => {
+            o.classList.add('visible');
+        });
+        this._saveState();
+    }
+
+    hide() {
+        [this.modal, this.overlay].map(o => o.classList.remove('visible'));
+        this._clearState();
+    }
 
 }
 

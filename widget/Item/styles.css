@@ -8,6 +8,7 @@
     cursor: pointer;
     transition: background-color 0.2s;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: auto 8px 0;
 }
 
 .partial-results {
