@@ -1,28 +1,38 @@
 # Web Development Final Exam 🚀
 
-⏰ **You have 2 hours from the moment you start your Codespace.**
+⏰ **You have 1 hour and 45 minutes to complete this project.**
 
-## How to start
+## How to proceed
 
 1. Fork this repo **into your own account**.
 2. Click the green **Code → Codespaces → Create codespace** button.
-3. Run `npm install` in the terminal.
-4. Open `src/` files and follow every **TODO** comment.
-5. While you work, run `npm test --watch` to see which tests pass.
-6. Commit and push often. Your last push before the deadline is final.
+3. Install the Live-Server extension (if needed), and launch a live preview of the `index.html` page.
+4. Note the persistent widget at the top-right of the page, work through its tasks from top to bottom.
+    - Clicking a task will reveal additional details
+5. When you are finished with your exam, commit and sync your code and notify your instructor.
 
-> **Rule:** Do not remove or edit the tests.
+> **IMPORTANT:** The `<head>` element on your `index.html` page should always contain the widget code below. If the test widget ever vanishes from your page, notify your instructor immediately.
 
----
+```html
+    <!--
+    ╔════════════════════════════════════════════════════════════════════════════╗
+    ║ ★★★★★★★★★★★★★★★★  DO NOT DELETE OR MODIFY  ★★★★★★★★★★★★★★★ ║
+    ╠════════════════════════════════════════════════════════════════════════════╣
+    ║    Widget files MUST NOT be altered in any way for the exam to function    ║
+    ║         THIS CODE MUST REMAIN BETWEEN YOUR <HEAD> AND </HEAD> TAGS         ║
+    ╚════════════════════════════════════════════════════════════════════════════╝ -->
+    <script type="module" src="widget/tracker.js"></script>
+    <link rel="stylesheet" href="widget/tracker.css"> <!--
+    ╔════════════════════════════════════════════════════════════════════════════╗
+    ║         THIS CODE MUST REMAIN BETWEEN YOUR <HEAD> AND </HEAD> TAGS         ║
+    ║    Widget files MUST NOT be altered in any way for the exam to function    ║
+    ╠════════════════════════════════════════════════════════════════════════════╣
+    ║ ★★★★★★★★★★★★★★★★  DO NOT DELETE OR MODIFY  ★★★★★★★★★★★★★★★ ║
+    ╚════════════════════════════════════════════════════════════════════════════╝ -->
+```
 
-### Grading
+## Tips and Advice
 
-| Status | Meaning |
-| ------ | ------- |
-| ✅ Test passes | You earned the points |
-| ❌ Test fails  | Fix until green |
-
-Total autograded points: **50**.  
-Your instructor will manually review code style and readability for the remaining 50 points.
+When working with scripting tasks, open your developer tools and keep the _Console_ visible. Watch for errors that may give insights into particular challenges you're facing.
 
 Good luck, have fun, and may the console be ever in your favor!
