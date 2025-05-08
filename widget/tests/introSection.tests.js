@@ -7,7 +7,7 @@ export default {
     tests: [
         {
             "name": "Has `section#intro` element",
-            "about": "The page must contain a `<section>` element with id `'intro'`, immediately within the `<body>` element.",
+            "about": "The page must contain a `<section>` element with id \"`intro`\", immediately within the `<body>` element.",
             "fn": () => !!document.querySelector('body > main > section#intro'),
         },
         {
@@ -23,7 +23,7 @@ export default {
         },
         {
             "name": "Has greeting paragraph",
-            "about": "The `section#intro` element must contain a `p#greeting` child as its _last-child_. This is where our greeting messages will be programmatically displayed (that functionality is handled in the `scripts/greetings.js` file).",
+            "about": "The `section#intro` element must contain a `p#greeting` element as its _last-child_. This is where our greeting messages will be programmatically displayed (that functionality is handled in the `scripts/greetings.js` file).",
             "fn": () => !!document.querySelector('body > main > section#intro > p#greeting:last-child'),
         },
     ]

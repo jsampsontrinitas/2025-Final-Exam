@@ -5,12 +5,12 @@ export default {
     tests: [
         {
             "name": "Has `todo.css` attached",
-            "about": "The page must include a `<link>` element with the `href` attribute set to `'styles/todo.css'`.",
+            "about": "The page must include a `<link>` element with the `href` attribute set to \"`styles/todo.css`\".",
             "fn": () => !!document.querySelector('link[href="styles/todo.css"]'),
         },
         {
             "name": "Has `todo.js` properly attached",
-            "about": "The page must include a `<script>` element with the `src` attribute set to `'scripts/todo.js'`. Our script queries the document for various elements, so we must ensure the document has fully loaded before our script is executed.",
+            "about": "The page must include a `<script>` element with the `src` attribute set to \"`scripts/todo.js`\". Our script queries the document for various elements, so we must ensure the document has fully loaded before our script is executed.",
             fn: () => makeTaskReport([
                 "head script[src$='scripts/todo.js']",
                 "head script[src$='scripts/todo.js'][defer]",
@@ -31,7 +31,7 @@ export default {
         },
         {
             "name": "Has `ul#list` list element",
-            "about": "The page must contain a `<ul>` element with id `'list'`. This element is expected to be the last child of the `section#todo` element. It should have no children by default.",
+            "about": "The page must contain a `<ul>` element with id \"`list`\". This element is expected to be the last child of the `section#todo` element. It should have no children by default.",
             fn: () => makeTaskReport([
                 "ul#list",
                 "section#todo > ul",
@@ -42,7 +42,7 @@ export default {
         },
         {
             name: "Has `div#listControls` element",
-            about: "The `section#todo` must contain a `<div>` with id \"`listControls`\". This element should be the second child of the `section#todo`. It must contain an `<input>` with an `id` attribute of \"`#newItem`\".",
+            about: "The `section#todo` must contain a `<div>` with id \"`listControls`\". This element should be the second child of the `section#todo`. It must contain an `<input>` with an `id` attribute of \"`newItem`\".",
             fn: () => makeTaskReport([
                 "div#listControls",
                 "section#todo > div#listControls",
@@ -83,7 +83,7 @@ export default {
         },
         {
             "name": "Can add items",
-            "about": "We should be able to add items to our TODO list.",
+            "about": "We should be able to add items to our TODO list by filling in the text input, and clicking the _Add Item_ button. The list should contain one more item after this action.",
             "fn": () => {
                 const todo = document.querySelector("#todo");
                 const input = todo && document.querySelector("#newItem");
@@ -107,7 +107,7 @@ export default {
         },
         {
             "name": "Can clear list",
-            "about": "We should be able to click the _Clear List_ button to remove all items in the list.",
+            "about": "We should be able to click the _Clear List_ button to remove all items in the list. The list should be empty after this action.",
             "fn": () => {
                 const list = document.querySelector("#list");
                 const button = list && document.querySelector("#clearList");

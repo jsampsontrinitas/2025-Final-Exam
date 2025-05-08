@@ -5,7 +5,7 @@ export default {
     tests: [
         {
             name: "Has `greeting.js` linked",
-            about: "The page must attach `'scripts/greeting.js'` via a `<script>` element. This script needs to access elements on the page, so make sure to defer its loading.",
+            about: "The page must attach `scripts/greeting.js` via a `<script>` element. This script needs to access elements on the page, so make sure to defer its loading.",
             fn: () => makeTaskReport([
                 "head script[src$='scripts/greeting.js']",
                 "head script[src$='scripts/greeting.js'][defer]",
@@ -13,17 +13,17 @@ export default {
         },
         {
             name: "Has `section#intro` element",
-            about: "The page must contain a `<section>` element with id `'intro'`. This element should be the first child of the `main` element.",
+            about: "The page must contain a `<section>` element with id \"`intro`\". This element should be the first child of the `main` element.",
             fn: () => !!document.querySelector('main > section#intro'),
         },
         {
             "name": "Has `p#greeting` element",
-            "about": "The page must contain a `<p>` element with id `'greeting'`. This element should be the last child of the `section#intro` element.",
+            "about": "The page must contain a `<p>` element with id \"`greeting`\". This element should be the last child of the `section#intro` element.",
             "fn": () => !!document.querySelector('section#intro p#greeting:last-child'),
         },
         {
             "name": "Script sets greeting text",
-            "about": "Once your `greeting.js` script has been added to the page, and any issues contained within are corrected, the `<p>` element with id `'greeting'` should be auto-populated with a greeting message.",
+            "about": "Once your `greeting.js` script has been added to the page, and any issues contained within are corrected, the `<p>` element with id \"`greeting`\" should be auto-populated with a greeting message.",
             fn: () => (document.querySelector('p#greeting')?.textContent ?? "") !== "",
         },
         {

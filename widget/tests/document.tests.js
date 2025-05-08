@@ -41,7 +41,7 @@ export default {
         },
         {
             name: "English Content",
-            about: "Our page should declare that its content is written in English. This is typically handled via an attribute on the `<html>` element itself.",
+            about: "Our page should declare that its content is written in English. This is typically handled via an attribute on the `<html>` element itself with a special attribute.",
             fn: () => document.documentElement.getAttribute("lang").toLowerCase() == "en",
         },
         {

@@ -5,7 +5,7 @@ export default {
     tests: [
         {
             name: "Main heading",
-            about: "The page must have an `<h1>` element with id `'mainHeading'`, placed immediately within the `<body>`. This element should be the first child of the body. The content of this heading should be the message \"Hello, Web!\" (without quotes).",
+            about: "The page must have an `<h1>` element with id \"`mainHeading`\", placed immediately within the `<body>`. This element should be the first child of the body. The content of this heading should be the message \"Hello, Web!\" (without quotes).",
             fn: () => makeTaskReport([
                 "body > h1",
                 "body > h1#mainHeading",
@@ -25,7 +25,7 @@ export default {
         },
         {
             name: "Main heading image",
-            about: "The `<h1>` element with id `'mainHeading'` must be immediately followed by an `<img>` element with the `src` attribute set to `'images/crest.png'` and an `alt` attribute that contains the word 'Trinitas'.",
+            about: "The `<h1>` element with id \"`mainHeading`\" must be immediately followed by an `<img>` element with the `src` attribute set to \"`images/crest.png`\" and an `alt` attribute that contains the word \"Trinitas\".",
             fn: () => !!document.querySelector("body > h1#mainHeading + img[src$='crest.png'][alt*='trinitas' i]"),
         },
         {
@@ -52,17 +52,17 @@ export default {
         },
         {
             name: "Main content area",
-            about: "The page must contain a `<main>` element after the `<nav>`.",
+            about: "The page must contain a `<main>` element _after_ the `<nav>`.",
             fn: () => !!document.querySelector("body > nav + main"),
         },
         {
             name: "Main content sections",
-            about: "The `<main>` element must contain two `<section>` elements. The first should have id `'intro'`, and the second should have id `'todo'`.",
+            about: "The `<main>` element must contain two `<section>` elements. The first should have id \"`intro`\", and the second should have id \"`todo`\".",
             fn: () => !!document.querySelector(`body > main > section#intro:first-child + section#todo:last-child`),
         },
         {
             name: "Intro and greeting",
-            about: "The first `<section>` (with id `'intro'`) must contain a `<p>` element with id `'greeting'`.",
+            about: "The first `<section>` (with id \"`intro`\") must contain a `<p>` element with id \"`greeting`\".",
             fn: () => !!document.querySelector(`body > main > section#intro:first-child > p#greeting:last-child`),
         },
         {

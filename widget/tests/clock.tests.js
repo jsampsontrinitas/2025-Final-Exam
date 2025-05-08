@@ -5,7 +5,7 @@ export default {
     tests: [
         {
             name: "Has `clock.js` linked",
-            about: "The page must attach `'scripts/clock.js'` via a `<script>` element. This script needs to access elements on the page, so make sure to defer its loading.",
+            about: "The page must attach `scripts/clock.js` via a `<script>` element. This script needs to access elements on the page, so make sure to defer its loading.",
             fn: () => makeTaskReport([
                 "head script[src$='scripts/clock.js']",
                 "head script[src$='scripts/clock.js'][defer]",
@@ -13,7 +13,7 @@ export default {
         },
         {
             name: "Has `div#clock` element",
-            about: "The page must contain a `<div>` element with id `'clock'`. This element should be the first child of the `footer` element.",
+            about: "The page must contain a `<div>` element with id \"`clock`\". This element should be the first child of the `footer` element.",
             fn: () => makeTaskReport([
                 "footer > div",
                 "footer > div#clock",
@@ -22,7 +22,7 @@ export default {
         },
         {
             name: "Clock is updateable",
-            about: "The `clock.js` script stores the current time in a variable called `now`. This variable should be updateable.",
+            about: "The `clock.js` script stores the current time in a variable called `now`. This variable should be reassignable.",
             fn: () => {
                 let nowExists = false;
                 let initialValue = null;
