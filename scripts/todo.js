@@ -13,11 +13,11 @@ function clearListItems() {
     list.innerHTML = '';
 }
 
+clearList.addEventListener('click', () => {
+    clearListItems();
+});
+
 newItem.addEventListener('click', () => {
     const text = addItem.value;
     addListItem(text);
-});
-
-clearList.addEventListener('click', () => {
-    clearListItems();
 });

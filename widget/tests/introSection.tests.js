@@ -1,3 +1,7 @@
+import { makeTaskReport } from "./utils.js";
+
+const introHeadingSelector = "body > main > section#intro > h2:first-child";
+
 export default {
     name: "Intro Section",
     tests: [
@@ -8,8 +12,14 @@ export default {
         },
         {
             "name": "Has intro heading",
-            "about": "The `section#intro` element must contain as its _first-child_ an `<h2>` element.",
-            "fn": () => !!document.querySelector('body > main > section#intro > h2:first-child'),
+            "about": "The `section#intro` element must contain as its _first-child_ an `<h2>` element. The text content of this header should be \"_A word to our friends graduating this year…_\".",
+            "fn": () => makeTaskReport([
+                introHeadingSelector,
+                () => ["word", "friends", "year"].every((w) => {
+                    const element = document.querySelector(introHeadingSelector);
+                    return element && element.textContent.toLowerCase().includes(w);
+                }),
+            ]),
         },
         {
             "name": "Has greeting paragraph",

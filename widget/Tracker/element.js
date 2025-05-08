@@ -99,16 +99,6 @@ export default class TestStatusIndicator extends HTMLElement {
         header.className = `status-header ${this.getStatusClass()}`;
 
         const { total, partial, pending, passed, passRate } = this.getStatusCounts();
-        // const icon = header.querySelector(".test-icon");
-
-        // Add spinning icon if any tests are pending
-        // if (pending > 0 && !icon) {
-        //     const icon = getTestStatusIcon('pending');
-        //     header.insertBefore(icon, header.firstElementChild);
-        // } else {
-        //     icon?.remove();
-        // }
-
         const label = header.querySelector(".counts");
         const percent = Math.round(passRate * 100);
         label.textContent = `${passed} of ${total} (${percent}%)`;

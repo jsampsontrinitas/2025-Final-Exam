@@ -52,11 +52,13 @@ export default class TestItem extends HTMLElement {
             if (typeof results === "boolean") {
                 this.status = results ? 'passed' : 'failed';
             } else if (results && typeof results === "object" && !Array.isArray(results)) {
-                if (results.remaining === 0) {
+                this.partialResults = results;
+                if (results.completed === results.total) {
                     this.status = 'passed';
+                } else if (results.completed === 0) {
+                    this.status = 'failed';
                 } else {
                     this.status = 'partial';
-                    this.partialResults = results;
                 }
             }
         } catch (e) {
@@ -92,7 +94,12 @@ export default class TestItem extends HTMLElement {
 
         this._partialResults = results;
         const element = this.shadowRoot.querySelector(".partial-results");
-        element.textContent = `${results.remaining} of ${results.total} issues remaining`;
+
+        if (results.completed == 0) {
+            element.textContent = "";
+        } else if (results.completed < results.total) {
+            element.textContent = `${Math.round(results.completed / results.total * 100)}% Validated`;
+        }
     }
 
     /**

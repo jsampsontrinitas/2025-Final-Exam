@@ -1,6 +1,18 @@
+import { makeTaskReport } from "./utils.js";
+
 export default {
     name: "Page Styling",
     tests: [
+        {
+            name: "Main CSS Attached",
+            about: "The page must include a `<link>` element that loads the `\"main.css\"` stylesheet. The element should use the `[rel]` attribute to specify the relationship of the linked document to the current document. The value of this attribute should be \"`stylesheet`\". The proper location for a `<link>` element is within the `<head>` element.",
+            fn: () => makeTaskReport([
+                "head > link",
+                "link[href$='main.css']",
+                "link[href$='main.css'][rel='stylesheet']",
+                "head > link[href$='main.css'][rel='stylesheet']",
+            ])
+        },
         {
             "name": "Text color is `midnightblue`",
             "about": "The text color of our page should be `\"midnightblue\"`.",
@@ -19,10 +31,5 @@ export default {
                 return computedStyle.backgroundColor === "rgb(248, 248, 255)";
             },
         },
-        {
-            name: "Body uses flexbox",
-            about: "The `<body>` element should be rendered as a flexbox container. Careful though, because you can have the correct syntax, and still have this issue fail. The browser's ability to properly lay out elements is in large part governed by the page's _doctype_.",
-            fn: () => getComputedStyle(document.body).display === "flex",
-        }
     ]
 }

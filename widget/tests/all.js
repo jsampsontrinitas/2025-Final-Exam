@@ -6,14 +6,16 @@ import javascriptTests from "./javascript.tests.js";
 import siteTests from "./site.tests.js";
 import introSectionTests from "./introSection.tests.js";
 import mainContentTests from "./mainContent.tests.js";
+import clockTests from "./clock.tests.js";
 
 export const testGroups = [
+    stylingTests,
     mainContentTests,
+    introSectionTests,
     javascriptTests,
     greetingsTests,
     todolistTests,
+    clockTests,
     siteTests,
     documentTests,
-    stylingTests,
-    introSectionTests,
 ];
