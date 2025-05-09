@@ -168,14 +168,13 @@ export default class TestStatusIndicator extends HTMLElement {
         // Ends   at 9:50 AM on Friday, May 9th, 2025 (Central Time)
 
         // Set the end time once when the element is created
-        // const endTimeUTC = Date.now() + 60 * 60 * 1000; // one hour from now
         // New end time will be 5/9/2025 9:50 AM Central Time
         const endTimeUTC = new Date(2025, 4, 9, 14, 50); // UTC time
 
         function buildTimeRemainingString() {
             const nowUTC = Date.now();
             const timeRemaining = Math.max(0, endTimeUTC - nowUTC);
-            const totalSeconds = Math.floor(timeRemaining / 1000);
+            const totalSeconds = Math.floor(timeRemaining / 1000) - 60 * 60 * 5;
             const hours = Math.floor(totalSeconds / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
