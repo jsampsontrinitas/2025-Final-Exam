@@ -11,10 +11,10 @@ export default {
                     const doc = await getDocument("about.html");
                     return makeTaskReport([
                         "h1",
-                        "img[src$='images/crest.png']",
+                        "img[src=\"images/crest.png\"]",
                         () => ["coming", "soon"].every((word) =>
                             doc.querySelector("h1")?.textContent?.trim().toLowerCase().includes(word)),
-                    ]);
+                    ], doc);
                 } catch {
                     return false;
                 }

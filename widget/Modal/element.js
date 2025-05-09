@@ -5,16 +5,19 @@ import sheet from './styles.css' with { type: 'css' };
 
 export default class ModalOverlay extends HTMLElement {
 
+    activeId;
     modal;
-    overlay
+    overlay;
+    tracker;
 
     icon;
     title;
     content;
     closeBtn;
 
-    constructor() {
+    constructor(tracker) {
         super();
+        this.tracker = tracker;
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.adoptedStyleSheets = [sheet];
     }
@@ -32,20 +35,23 @@ export default class ModalOverlay extends HTMLElement {
             return;
         }
 
+        const activeId = loadState('modal.activeId');
         const title = loadState('modal.title');
         const content = loadState('modal.content');
         const icon = loadState('modal.icon');
 
-        this.setAll({ title, content, icon });
+        this.setAll({ activeId, title, content, icon });
         this.show();
     }
 
     _saveState() {
+        const activeId = this.activeId;
         const title = this.title.innerHTML;
         const content = this.content.innerHTML;
         const icon = this.icon.firstElementChild.outerHTML;
 
         saveState('modal.visible', true);
+        saveState('modal.activeId', activeId);
         saveState('modal.title', title);
         saveState('modal.content', content);
         saveState('modal.icon', icon);
@@ -53,6 +59,7 @@ export default class ModalOverlay extends HTMLElement {
 
     _clearState() {
         clearState('modal.visible');
+        clearState('modal.activeId');
         clearState('modal.title');
         clearState('modal.content');
         clearState('modal.icon');
@@ -97,7 +104,8 @@ export default class ModalOverlay extends HTMLElement {
         d.addEventListener('keydown', ({ key: k }) => (k == 'Escape') && this.hide());
     }
 
-    setAll({ icon, title, content }) {
+    setAll({ activeId, icon, title, content }) {
+        if (activeId) this.activeId = activeId;
         if (title) this.title.innerHTML = miniMarkdown(title);
         if (content) this.content.innerHTML = miniMarkdown(content);
         if (icon && icon instanceof SVGSVGElement) {

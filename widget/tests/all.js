@@ -9,6 +9,7 @@ import mainContentTests from "./mainContent.tests.js";
 import clockTests from "./clock.tests.js";
 
 export const testGroups = [
+    documentTests,
     stylingTests,
     mainContentTests,
     introSectionTests,
@@ -17,5 +18,4 @@ export const testGroups = [
     todolistTests,
     clockTests,
     siteTests,
-    documentTests,
 ];

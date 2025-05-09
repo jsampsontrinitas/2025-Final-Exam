@@ -23,26 +23,26 @@ export const getDocument = async (url) => {
  * @param {Array<string|Function>} taskList - Array of CSS selectors (string) or boolean-returning functions.
  * @returns {{completed: number, total: number}}
  */
-export const makeTaskReport = async (taskList) => {
+export const makeTaskReport = async (taskList, doc = document) => {
 
     const state = { completed: 0, total: 0 };
 
     for (const req of taskList) {
         state.total++;
 
-        const selectorSucceeded = typeof req === "string" && document.querySelector(req);
+        const selectorSucceeded = typeof req === "string" && doc.querySelector(req);
         const functionSucceeded = typeof req === "function" && await req();
 
         if (selectorSucceeded || functionSucceeded) {
             state.completed++;
         } else {
-            console.warn(`Task failed:`);
-            if ( typeof req === "string" && !selectorSucceeded ) {
-                console.warn(`Selector Failed: ${req}`);
-            }
-            if ( typeof req === "function" && !functionSucceeded ) {
-                console.warn(`Function Failed: ${req}`);
-            }
+            // console.warn(`Task failed:`);
+            // if ( typeof req === "string" && !selectorSucceeded ) {
+            //     console.warn(`Selector Failed: ${req}`);
+            // }
+            // if ( typeof req === "function" && !functionSucceeded ) {
+            //     console.warn(`Function Failed: ${req}`);
+            // }
         }
     }
 

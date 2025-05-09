@@ -1,6 +1,6 @@
 :root {
     --text-color: midnightblue;
-    --background-color: ghostwhite;
+    -background-color: ghostwhite;
 }
 
 html {
@@ -16,7 +16,7 @@ body {
     align-items: center;
     flex-direction: column;
     background: var(--background-color);
-    color: var(--text-color);
+    color: var--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

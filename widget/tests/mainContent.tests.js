@@ -71,8 +71,8 @@ export default {
             fn: () => {
                 const footer = document.querySelector("body > footer");
                 const smallEl = footer && footer.querySelector("small");
-                return smallEl && ["2025", "final", "exam", "site"].every((word) =>
-                    smallEl.innerHTML.trim().toLowerCase().includes(word));
+                return !!(smallEl && ["2025", "final", "exam", "site"].every((word) =>
+                    smallEl.innerHTML.trim().toLowerCase().includes(word)));
             }
         }
     ]

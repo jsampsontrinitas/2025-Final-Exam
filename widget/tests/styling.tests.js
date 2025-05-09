@@ -7,10 +7,9 @@ export default {
             name: "Main CSS Attached",
             about: "The page must include a `<link>` element that loads the \"`main.css`\" stylesheet. The element should use the `[rel]` attribute to specify the relationship of the linked document to the current document. The value of this attribute should be \"`stylesheet`\". The proper location for a `<link>` element is within the `<head>` element.",
             fn: () => makeTaskReport([
-                "head > link",
-                "link[href$='main.css']",
+                "head > link[href$='main.css']",
                 "link[href$='main.css'][rel='stylesheet']",
-                "head > link[href$='main.css'][rel='stylesheet']",
+                "head > link[href$='styles/main.css'][rel='stylesheet']",
             ])
         },
         {

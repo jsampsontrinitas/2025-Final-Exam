@@ -10,7 +10,7 @@ export default class TestStatusIndicator extends HTMLElement {
 
     constructor() {
         super();
-        this.modal = new ModalOverlay();
+        this.modal = new ModalOverlay(this);
         this.expanded = false;
         this.testData = [];
 
@@ -97,6 +97,7 @@ export default class TestStatusIndicator extends HTMLElement {
         }
 
         this.modal.setAll({
+            activeId: testItem.id,
             icon: getTestStatusIcon(testItem.status),
             title: testItem.name,
             content: testItem.about,

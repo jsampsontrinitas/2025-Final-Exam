@@ -1,4 +1,10 @@
-:root { --c1: #ff0055; --c2: #00fff7; --c3: #ff00c8; --c4: #fff200; --c6: #00ff00 }
+:root {
+    --c1: #ff0055;
+    --c2: #00fff7;
+    --c3: #ff00c8;
+    --c4: #fff200;
+    --c6: #00ff00
+}
 
 :root:not(:has(head > script[src='widget/tracker.js'])) {
     background: black;
@@ -26,9 +32,35 @@
 }
 
 @keyframes glitch9800 {
-    0%, 100% { transform: none; color: var(--c1); filter: blur(0.5px) }
-    20% { transform: translate(-2px, 2px) skew(-2deg); color: var(--c2); filter: blur(1.5px) }
-    40% { transform: translate(2px, -1px) skew(2deg); color: var(--c3); filter: blur(0.5px) }
-    60% { transform: translate(-1px, 1px) skew(-1deg); color: var(--c4); filter: blur(2px) }
-    80% { transform: translate(1px, -2px) skew(1deg); color: var(--c6); filter: blur(0.5px) }
+
+    0%,
+    100% {
+        transform: none;
+        color: var(--c1);
+        filter: blur(0.5px)
+    }
+
+    20% {
+        transform: translate(-2px, 2px) skew(-2deg);
+        color: var(--c2);
+        filter: blur(1.5px)
+    }
+
+    40% {
+        transform: translate(2px, -1px) skew(2deg);
+        color: var(--c3);
+        filter: blur(0.5px)
+    }
+
+    60% {
+        transform: translate(-1px, 1px) skew(-1deg);
+        color: var(--c4);
+        filter: blur(2px)
+    }
+
+    80% {
+        transform: translate(1px, -2px) skew(1deg);
+        color: var(--c6);
+        filter: blur(0.5px)
+    }
 }

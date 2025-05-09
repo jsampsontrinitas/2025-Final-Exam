@@ -113,6 +113,16 @@ export default class TestItem extends HTMLElement {
         this._status = newStatus;
         this._suite.updateStatusCounts();
         this.icon = getTestStatusIcon(this._status);
+
+        // Update the modal if it's showing this item
+        if (this._suite.modal?.activeId === this._id) {
+            this._suite.modal.setAll({
+                icon: this.icon,
+                title: this._name,
+                content: this._about,
+            });
+        }
+
     }
 
     /**
